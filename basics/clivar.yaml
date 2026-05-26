@@ -1,0 +1,15 @@
+- name: Demo on cli 
+  hosts: all   
+  vars:
+    URL: play.google.com            
+  tasks: 
+    - name: Printing the variable
+      ansible.builtin.debug:
+        msg: "{{ URL }}"
+
+    - name: Printing the local variable
+      vars:
+        URL: local.google.com  
+      ansible.builtin.debug:
+        msg: "{{ URL }}"
+  
