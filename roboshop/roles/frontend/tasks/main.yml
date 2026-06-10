@@ -1,27 +1,22 @@
 - name: Disabling the default nginx module
-  ansible.builtin.dnf:
-    module_disable: 
-       - nginx
-    state: absent
-  
+  ansible.builtin.shell: dnf module disable nginx -y
 
+  
 - name: Enabling the default nginx version 
-  ansible.builtin.dnf:
-    name: nginx
-    state: present
-    module_enable:
-      - nginx:1.24
+  ansible.builtin.shell: dnf module enable nginx:1.24 -y
+  
 
 - name: Installing Nginx 
   ansible.builtin.package:
-    name: nginx 
+    name: nginx
     state: present
-
+  
 - name: Starting Nginx service
   ansible.builtin.service:
     name: nginx
     enabled: yes
     state: started
+
 
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname frontend-{{ env }}
