@@ -28,3 +28,4 @@
 - name: configuring the hostname
   ansible.builtin.hostname:
     name: "frontend-{{ env }}"
+    become: true
