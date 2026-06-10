@@ -26,8 +26,12 @@
     src: "{{ url }}"
     dest: /usr/share/"{{ packagename }}"/html
     remote_src: yes           # If yes, download from the URL mentioned in src machine, if no, copy from local machine to remote machine
-
-
+  
+- name: updating the nginx file
+  ansible.builtin.template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    
 - name: Starting "{{ packagename }}" service
   ansible.builtin.service:
     name: "{{ packagename }}"
