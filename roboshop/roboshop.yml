@@ -1,5 +1,5 @@
--name: configuring the roboshop app
-become: true
-hosts: frontend
-roles:
-  - frontend
+- name: configuring the roboshop app
+  become: true
+  hosts: frontend
+  roles:
+   - frontend
