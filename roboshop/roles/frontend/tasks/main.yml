@@ -25,7 +25,6 @@
     state: started
     enabled: yes
 
-- name: configuring the hostname
+- name: Set a hostname
   ansible.builtin.hostname:
-    name: "frontend-{{ env }}"
-    become: true
+    name: frontend-{{ env }}
