@@ -1,5 +1,5 @@
 
- -name : disable default nginx
+- name: disable default nginx
   ansible.builtin.service:
     name: nginx
     state: disabled
