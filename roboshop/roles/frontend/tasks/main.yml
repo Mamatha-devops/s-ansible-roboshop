@@ -4,16 +4,14 @@
     name: nginx
     state: stopped
     enabled: false
-    
-- name: Enable nginx module stream
-  ansible.builtin.command: dnf module enable nginx:1.24 -y
 
-- name: Install nginx
-  ansible.builtin.dnf:
+- name: enable nginx module stream
+  ansible.builtin.dnf_module:
     name: nginx
-    state: present
-    
-     
+    stream: 1.24
+    state: enabled
+    become: true
+
 - name: install nginx
   ansible.builtin.dnf:
     name: nginx
@@ -25,6 +23,7 @@
     state: started
     enabled: yes
 
-- name: Configuring the hostName
-  ansible.builtin.shell: set-hostname {{ component }}-{{ env }}
+- name: configure hostname
+  ansible.builtin.hostname:
+    name: "{{ component }}-{{ env }}"
   become: true
