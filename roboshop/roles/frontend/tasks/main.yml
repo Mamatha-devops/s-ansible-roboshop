@@ -25,4 +25,4 @@
 
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname frontend-{{ env }}
-      become: true
+  become: true
