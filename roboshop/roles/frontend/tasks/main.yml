@@ -4,22 +4,22 @@
     name: nginx
     state: stopped
     enabled: false
-  
-- name: install nginx
-  ansible.builtin.dnf:
-    name: nginx
-    state: enabled
-
-
+    
 - name: enable nginx 1.24 module
   ansible.builtin.dnf:
     name: nginx
-    state: enabled
-    version: 1.24
+    state: present 
+    module_enabled:
+      - nginx:1.24
     
+     
+- name: install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
 
 - name: start nginx
   ansible.builtin.service:
     name: nginx
     state: started
-    enabled: true
+    enabled: yes
