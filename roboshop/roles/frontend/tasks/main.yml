@@ -24,3 +24,7 @@
     name: nginx
     state: started
     enabled: yes
+
+    -name: configuring the hostname 
+    ansible.builtin.shell: set-hostname frontend-{{env}}
+    
