@@ -31,12 +31,12 @@
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
-    
+
 - name: Starting "{{ packagename }}" service
   ansible.builtin.service:
     name: "{{ packagename }}"
     enabled: yes
-    state: started
+    state: restarted
 
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname frontend-{{ env }}
