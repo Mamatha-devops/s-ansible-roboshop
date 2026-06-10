@@ -5,12 +5,13 @@
     state: stopped
     enabled: false
     
-- name: enable nginx 1.24 module
+- name: Enable nginx module stream
+  ansible.builtin.command: dnf module enable nginx:1.24 -y
+
+- name: Install nginx
   ansible.builtin.dnf:
     name: nginx
-    state: present 
-    module_enabled:
-      - nginx:1.24
+    state: present
     
      
 - name: install nginx
