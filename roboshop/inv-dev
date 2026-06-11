@@ -6,3 +6,24 @@ mongodb-dev.roboshope.shop
 
 [catalogue]
 catalogue-dev.roboshope.shop
+
+[redis]
+redis-dev.roboshope.shop
+
+[user]
+user-dev.roboshope.shop
+
+[cart]
+cart-dev.roboshope.shop
+
+[mysql]
+mysql-dev.roboshope.shop
+
+[shipping]
+shipping-dev.roboshope.shop
+
+[rabbitmq]
+rabbitmq-dev.roboshope.shop
+
+[payment]
+payment-dev.roboshope.shop
