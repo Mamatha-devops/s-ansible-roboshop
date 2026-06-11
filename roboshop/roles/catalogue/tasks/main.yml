@@ -45,12 +45,25 @@
     src: "{{ component }}.service"
     dest: "/etc/systemd/system/{{ component }}.service"
 
+- name: configuring the mongodb repo
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: installing mongodbshell
+  ansible.builtin.package:
+    name: mongodb-mongosh
+    state: present    
+
 - name: Starting "{{ component }}" service
   ansible.builtin.service:
     name: "{{ component }}"
     enabled: yes
     state: restarted
     daemon_reload: yes  
+
+- name: injecting mongodb schema
+  ansible.builtin.shell: "mongo --host mongodb-{{ env }}.roboshope.shop </app/db/master-data.js"godb_schema
 
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
