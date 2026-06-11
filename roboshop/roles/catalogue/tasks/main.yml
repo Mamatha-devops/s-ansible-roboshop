@@ -41,3 +41,7 @@
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
   become: true
+
+- name: Configuring the hostName 
+  ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
+  become: true
