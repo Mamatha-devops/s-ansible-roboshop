@@ -1,5 +1,5 @@
 - name: disable {{ packageName }} module
-  ansible.builtin.shell: dnf module disable {{packageName}} -y
+  ansible.builtin.shell: dnf module disable {{ packageName}} -y
   become: true
 
 - name: enable {{ packageName }} module {{ packageversion }}
