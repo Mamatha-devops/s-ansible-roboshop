@@ -13,3 +13,45 @@
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname {{ component }}-{{ env }}
   become: true
+  
+- name: creating the {{ component }} user
+  ansible.builtin.user:
+    name: "{{ appuser }}"
+    createhome: yes
+
+- name: Cleanup of the  "{{ appdirectory }}" content
+  ansible.builtin.file:
+    path: {{ appdirectory }}
+    state: absent
+
+
+- name: creating the {{ component }} directory
+  ansible.builtin.file:
+    path: "{{ appdirectory }}"
+    state: directory
+
+- name: Download and extract frontend
+  ansible.builtin.unarchive:
+    src: "{{ url }}"
+    dest: "{{ appdirectory }}"
+    remote_src: yes 
+
+- name: generating the artifacts
+  community.general.npm:
+   path: "{{ appdirectory }}"
+
+- name: configuring the {{ component }} service
+  ansible.builtin.template:
+    src: "{{ component }}.service"
+    dest: /etc/systemd/system/{{ component }}.service
+
+- name: Starting "{{ component }}" service
+  ansible.builtin.service:
+    name: "{{ component }}"
+    enabled: yes
+    state: restarted
+    daemon_reload: yes  
+
+- name: Configuring the hostName 
+  ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
+  become: true
