@@ -9,6 +9,12 @@
     name: "{{ packageName }}"
     state: present
 
+- name: enabling the visibility
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp:  '127.0.0.1'
+    replace: '0.0.0.0'
+    
 - name: Starting "{{ packagename }}" service
   ansible.builtin.service:
     name: mongod
