@@ -1,5 +1,5 @@
-- name: configuring the roboshop app
+- name: Configuring the roboshop app
   become: true
   hosts: "{{ component }}"
   roles:
-   - "{{ component }}"
+    - "{{ component }}"
