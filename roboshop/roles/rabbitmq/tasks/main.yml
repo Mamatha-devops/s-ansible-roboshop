@@ -8,17 +8,21 @@
     name: "{{ packageName }}" 
     state: present
 
-- name: Enabling the visibility of "{{ packageName }}" service
-  ansible.builtin.replace:
-    path: /etc/mongod.conf
-    regexp: '127.0.0.1'
-    replace: '0.0.0.0'
-
 - name: Starting "{{ packageName }}" service
   ansible.builtin.service:
-    name: mongod
+    name: "{{ packageName }}"
     enabled: yes
     state: restarted
+
+- name: Creating {{ appUser }} for {{ component }} service
+  community.rabbitmq.rabbitmq_user:
+    user: "{{ appUser }}"
+    password: roboshop123
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
 
 - name: Configuring the hostName
   ansible.builtin.shell: set-hostname {{ component }}-{{ env }}

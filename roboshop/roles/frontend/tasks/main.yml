@@ -1,43 +1,40 @@
-- name: Disabling the default "{{ packagename }}" module
-  ansible.builtin.shell: dnf module disable "{{ packagename }}" -y
+- name: Disabling the default "{{ packageName }}" module
+  ansible.builtin.shell: dnf module disable "{{ packageName }}" -y
 
-  
-- name: Enabling the default "{{ packagename }}" version 
-  ansible.builtin.shell: dnf module enable "{{ packagename }}":"{{ packageversion }}" -y
-  
+- name: Enabling the default "{{ packageName }}" module
+  ansible.builtin.shell: dnf module enable "{{ packageName }}":"{{ packageVersion }}" -y
 
-- name: Installing "{{ packagename }}" 
+- name: Installing "{{ packageName }}" 
   ansible.builtin.package:
-    name: "{{ packagename }}"
+    name: "{{ packageName }}" 
     state: present
-  
-- name: Cleanup of the default "{{ packagename }}" content
+
+- name: Cleanup of the default "{{ packageName }}" content
   ansible.builtin.file:
-    path: /usr/share/"{{ packagename }}"/html
+    path: "/usr/share/{{ packageName }}/html"
     state: absent
 
-- name: preparing the directory for html
+- name: Preparing the "{{ packageName }}" directory
   ansible.builtin.file:
-   path: /usr/share/"{{ packagename }}"/html
-   state: directory
+    path: "/usr/share/{{ packageName }}/html"
+    state: directory
 
 - name: Download and extract frontend
   ansible.builtin.unarchive:
     src: "{{ url }}"
-    dest: /usr/share/"{{ packagename }}"/html
+    dest: "/usr/share/{{ packageName }}/html"
     remote_src: yes           # If yes, download from the URL mentioned in src machine, if no, copy from local machine to remote machine
-  
-- name: updating the nginx file
+
+- name: Updating the nginx configuration file
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-- name: Starting "{{ packagename }}" service
+- name: Starting "{{ packageName }}" service
   ansible.builtin.service:
-    name: "{{ packagename }}"
+    name: "{{ packageName }}"
     enabled: yes
     state: restarted
 
-- name: Configuring the hostName 
-  ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
-  become: true
+- name: Configuring the hostName
+  ansible.builtin.shell: set-hostname {{ component }}-{{ env }}
