@@ -63,7 +63,7 @@
     daemon_reload: yes  
 
 - name: injecting mongodb schema
-  ansible.builtin.shell: "mongo --host mongodb-{{ env }}.roboshope.shop </app/db/master-data.js"godb_schema
+  ansible.builtin.shell: "mongo --host mongodb-{{ env }}.roboshope.shop </app/db/master-data.js"
 
 - name: Configuring the hostName 
   ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
