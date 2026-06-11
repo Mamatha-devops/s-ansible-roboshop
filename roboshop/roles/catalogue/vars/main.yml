@@ -4,3 +4,4 @@ component: "catalogue"
 appuser: "roboshop"
 appdirectory: "/app"
 url: "https://stan-robotshop.s3.amazonaws.com/catalogue.zip"
+setup_mongodb_schema: true
