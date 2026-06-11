@@ -21,13 +21,13 @@
 
 - name: Cleanup of the  "{{ appdirectory }}" content
   ansible.builtin.file:
-    path: {{ appdirectory }}
+    path: "{{ appdirectory }}"
     state: absent
 
 
 - name: creating the {{ component }} directory
   ansible.builtin.file:
-    path: {{ appdirectory }}
+    path: "{{ appdirectory }}"
     state: directory
 
 - name: Download and extract frontend
