@@ -1,15 +1,15 @@
-- name: disable {{packageName}} module
+- name: disable {{ packageName }} module
   ansible.builtin.shell: dnf module disable {{packageName}} -y
   become: true
 
-- name: enable {{packageName}} module {{packageversion}}
-  ansible.builtin.shell: dnf module enable {{packageName}}:{{packageversion}} -y
+- name: enable {{ packageName }} module {{ packageversion }}
+  ansible.builtin.shell: dnf module enable {{ packageName }}:{{ packageversion}} -y
   become: true
 
-- name: install {{packageName}}
-  ansible.builtin.shell: dnf install {{packageName}} -y
+- name: installing {{ packageName }}
+  ansible.builtin.shell: dnf install {{ packageName}} -y
   become: true
 
 - name: Configuring the hostName 
-  ansible.builtin.shell: set-hostname {{ component}}-{{ env }}
+  ansible.builtin.shell: set-hostname {{ component }}-{{ env }}
   become: true
